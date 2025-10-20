@@ -1,38 +1,20 @@
 <?php
 
-use App\Http\Controllers\KeretaController;
-use App\Http\Controllers\Stasiun;
-use Illuminate\Http\Request;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('form.index');
+    return view('welcome');
 });
 
-Route::get('/stasiun', [Stasiun::class, 'index'])->name('stasiun.index');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::post('/action', function (Request $req){
-    return $req->all();
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/kereta', [KeretaController::class, 'index'])->name('kereta.index');
-
-Route::get('/kereta/create', [KeretaController::class, 'create'])->name('kereta.create');
-
-Route::post('/kereta', [KeretaController::class, 'store'])->name('kereta.store');
-
-
-
-
-Route::get('/kereta', [KeretaController::class, 'index'])->name('kereta.index');
-
-Route::get('/kereta/{id}', [KeretaController::class, 'show'])->name('kereta.show');
-
-
-
-
-Route::get('/kereta/{id}/edit', [KeretaController::class, 'edit'])->name('kereta.edit');
-
-Route::put('/kereta/{id}', [KeretaController::class, 'update'])->name('kereta.update');
-
-Route::delete('/kereta/{id}', [KeretaController::class, 'destroy'])->name('kereta.destroy');
+require __DIR__.'/auth.php';
