@@ -18,7 +18,7 @@ class Tiket extends Model
         'id_kereta',
         'id_stasiun_asal',
         'id_stasiun_tujuan',
-        'tanggal_keberankatan',
+        'tanggal_keberangkatan',
         'waktu_keberangkatan',
     ];
 
