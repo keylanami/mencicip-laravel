@@ -1,11 +1,14 @@
 <?php
 
+use App\Exports\ExportKereta;
 use App\Http\Controllers\KeretaController;
 use App\Http\Controllers\Stasiun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TiketController;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ImportKereta;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,7 +34,21 @@ Route::post('/kereta', [KeretaController::class, 'store'])->name('kereta.store')
 Route::get('/stasiun', [Stasiun::class, 'index'])->name('stasiun.index');
 
 
+
 Route::get('/kereta', [KeretaController::class, 'index'])->name('kereta.index');
+Route::get('/kereta/export', function(){
+    return Excel::download(new ExportKereta, 'kereta.xlsx');
+})->name('kereta.export');
+
+Route::post('/kereta/import', function(Request $request){
+    Excel::import(new ImportKereta, $request->file('file'));
+    
+    // return response()->json([
+    //     'message' => 'sukses'], 200);
+
+    return redirect('/');
+})->name('kereta.import');
+
 Route::get('/kereta/{id}', [KeretaController::class, 'show'])->name('kereta.show');
 
 
@@ -45,5 +62,6 @@ Route::post('/tiket', [TiketController::class, 'store'])->name('tiket.store');
 Route::get('/tiket', [TiketController::class, 'index'])->name('tiket.index');
 
 });
+
 
 require __DIR__.'/auth.php';
