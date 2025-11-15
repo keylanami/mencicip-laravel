@@ -13,7 +13,7 @@
                         Export Kereta
                     </button> 
                 </a>
-                <form href="{{ route('kereta.import') }}"
+                <form href="{{ route('kereta.import') }} id="importForm"
                     class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-2 py-2 rounded-lg transition flex btn btn-success"
                     method="post" enctype="multipart/form-data">
             
@@ -22,6 +22,10 @@
                     <button type="submit">
                         Import Kereta
                     </button> 
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', )
+                    </script>
                 </form>
             </div>
         </div>

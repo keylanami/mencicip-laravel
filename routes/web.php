@@ -33,7 +33,7 @@ Route::post('/kereta', [KeretaController::class, 'store'])->name('kereta.store')
 
 Route::get('/stasiun', [Stasiun::class, 'index'])->name('stasiun.index');
 
-
+  
 
 Route::get('/kereta', [KeretaController::class, 'index'])->name('kereta.index');
 Route::get('/kereta/export', function(){
@@ -43,10 +43,10 @@ Route::get('/kereta/export', function(){
 Route::post('/kereta/import', function(Request $request){
     Excel::import(new ImportKereta, $request->file('file'));
     
-    // return response()->json([
-    //     'message' => 'sukses'], 200);
+    return response()->json([
+        'message' => 'sukses'], 200);
 
-    return redirect('/');
+    // return redirect('/');
 })->name('kereta.import');
 
 Route::get('/kereta/{id}', [KeretaController::class, 'show'])->name('kereta.show');
