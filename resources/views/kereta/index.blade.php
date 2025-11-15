@@ -23,10 +23,29 @@
                         Import Kereta
                     </button> 
 
-                    <script>
-                        document.addEventListener('DOMContentLoaded', )
-                    </script>
                 </form>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const importForm = document.getElementById('importForm');
+                            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                            
+                            importForm.addEventListener('submit', async function(event) {
+                                event.preventDefault();
+                                const formData = new FormData(importForm);
+                                const response = await fetch(importForm.getAttribute('action'),{
+                                    method: 'POST',
+                                    headers: {
+                                        'X-CSRF-TOKEN': csrfToken,
+                                        'Accept': 'application/json'
+                                    },
+                                    body: formData
+                                });
+                                const result = await.response.json();
+                                alert(result.message);
+                                importForm.reset();
+                            })
+                        })
+                    </script>
             </div>
         </div>
     </x-slot>
