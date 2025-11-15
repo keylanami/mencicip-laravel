@@ -10,7 +10,7 @@
                 <a href="{{ route('kereta.export') }}"
                     class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-2 py-2 rounded-lg transition flex btn btn-success">
                     <button>
-                        Export Kereta
+                        Export
                     </button> 
                 </a>
                 <form href="{{ route('kereta.import') }} id="importForm"
@@ -20,7 +20,7 @@
                     @csrf
                     <input type="file" name="file">
                     <button type="submit">
-                        Import Kereta
+                        Import
                     </button> 
 
                 </form>
